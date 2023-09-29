@@ -1,4 +1,5 @@
 package com.example.week3_willy_53.ui.view
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
