@@ -28,7 +28,6 @@ fun HomeScreen(navController: NavController) {
     ) {
         Button(
             onClick = {
-                // Navigate to the Triangle Area screen
                 navController.navigate("triangle_area")
             },
             modifier = Modifier
@@ -39,64 +38,61 @@ fun HomeScreen(navController: NavController) {
             content = {
                 Text(
                     text = "Triangle Area",
-                    color = Color.White, // Change text color to white
-                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp) // Change font size
+                    color = Color.White,
+                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp)
                 )
             }
         )
 
         Button(
             onClick = {
-                // Navigate to the BMI screen
                 navController.navigate("bmi")
             },
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth() // Make the button fill the width
-                .height(60.dp), // Set the height of the button
-            colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.primary), // Change the button's background color
+                .fillMaxWidth()
+                .height(60.dp),
+            colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.primary),
             content = {
                 Text(
                     text = "BMI",
-                    color = Color.White, // Change text color to white
-                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp) // Change font size
+                    color = Color.White,
+                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp)
                 )
             }
         )
 
         Button(
             onClick = {
-                // Navigate to the BMI screen
                 navController.navigate("umur")
             },
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth() // Make the button fill the width
-                .height(60.dp), // Set the height of the button
-            colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.primary), // Change the button's background color
+                .fillMaxWidth()
+                .height(60.dp),
+            colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.primary),
             content = {
                 Text(
                     text = "Age Calculator",
-                    color = Color.White, // Change text color to white
-                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp) // Change font size
+                    color = Color.White,
+                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp)
                 )
             }
         )
         Button(
             onClick = {
-                // Navigate to the BMI screen
                 navController.navigate("score")
             },
             modifier = Modifier
                 .padding(16.dp)
-                .fillMaxWidth() // Make the button fill the width
-                .height(60.dp), // Set the height of the button
-            colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.primary), // Change the button's background color
+                .fillMaxWidth()
+                .height(60.dp),
+            colors = ButtonDefaults.buttonColors(contentColor = MaterialTheme.colorScheme.primary),
             content = {
                 Text(
                     text = "Student Score",
-                    color = Color.White, // Change text color to white
-                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp) // Change font size
+                    color = Color.White,
+                    style = androidx.compose.ui.text.TextStyle(fontSize = 18.sp)
                 )
             }
         )

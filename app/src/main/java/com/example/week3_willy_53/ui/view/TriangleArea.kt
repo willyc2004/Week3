@@ -46,14 +46,14 @@ fun TriangleArea() {
 
     var area = ""
 
-    if (isValidNumber(base) && isValidNumber(height)) {
-        area = if (base.isNotEmpty() && height.isNotEmpty()) {
+    area = if (isValidNumber(base) && isValidNumber(height)) {
+        if (base.isNotEmpty() && height.isNotEmpty()) {
             (0.5 * base.toInt() * height.toInt()).toString()
         } else {
             "0.0"
         }
     } else {
-        area = "0.0"
+        "0.0"
     }
 
     Surface(

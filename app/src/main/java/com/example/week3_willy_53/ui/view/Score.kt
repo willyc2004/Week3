@@ -152,7 +152,8 @@ fun Score() {
 
                         OutlinedTextField(
                             value = score3,
-                            onValueChange = { score3 = it
+                            onValueChange = {
+                                score3 = it
                             },
                             label = { Text("Yobel's Score", color = Color.Gray) },
                             shape = RoundedCornerShape(30.dp),
@@ -170,8 +171,12 @@ fun Score() {
                         )
                         Button(
                             onClick = {
-                                if(isValidScore(score1) && isValidScore(score2) && isValidScore(score3)) {
-                                    average = ((score1.toDouble() + score2.toDouble() + score3.toDouble()) / 3)
+                                if (isValidScore(score1) && isValidScore(score2) && isValidScore(
+                                        score3
+                                    )
+                                ) {
+                                    average =
+                                        ((score1.toDouble() + score2.toDouble() + score3.toDouble()) / 3)
                                     scoreText = when {
                                         average < 70 -> "Siswa perlu diberi soal tambahan"
                                         average >= 70 -> "Siswa mengerti pembelajaran"
@@ -182,6 +187,9 @@ fun Score() {
                                     currScore2 = score2
                                     currScore3 = score3
                                     showButton = true
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar(scoreText)
+                                    }
                                 } else {
                                     showButton = false
                                     scope.launch {
@@ -247,6 +255,7 @@ fun Score() {
         )
     }
 }
+
 fun isValidScore(input: String): Boolean {
     val numberPattern = Pattern.compile("^(?:100|[1-9]?[0-9])$")
     return numberPattern.matcher(input).matches()
