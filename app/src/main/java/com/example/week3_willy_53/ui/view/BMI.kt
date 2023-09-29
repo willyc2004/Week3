@@ -31,6 +31,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.week3_willy_53.ui.theme.Purple40
+import java.util.regex.Pattern
 import kotlin.math.pow
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,10 +95,9 @@ fun BMI() {
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.Blue,
                     unfocusedBorderColor = Color.Blue,
-                ),
-                isError = showError
+                )
             )
-            if (weightText == "") {
+            if (!isValidCM(weightText)) {
                 Text(
                     text = "Please enter a valid weight greater than 0",
                     modifier = Modifier
@@ -121,11 +121,10 @@ fun BMI() {
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     focusedBorderColor = Color.Blue,
                     unfocusedBorderColor = Color.Blue,
-                ),
-                isError = showError
+                )
             )
 
-            if (heightText == "") {
+            if (!isValidCM(heightText)) {
                 Text(
                     text = "Please enter a valid height greater than 0",
                     modifier = Modifier
@@ -137,7 +136,7 @@ fun BMI() {
 
             Button(
                 onClick = {
-                    if (weight != null && height != null && height > 0) {
+                    if (isValidCM(weightText) && isValidCM(heightText)) {
                         showDialog = true
                     } else {
                         showError = true
@@ -153,6 +152,27 @@ fun BMI() {
             )
             {
                 Text(text = "Calculate BMI")
+            }
+
+            if (showError) {
+                AlertDialog(
+                    onDismissRequest = {
+                        showError = false
+                    },
+                    title = {Text("Invalid Input") },
+                    confirmButton = {
+                        TextButton (
+                            onClick = {
+                                showError = false
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Purple40,
+                                contentColor = Color.White),
+                        ) {
+                            Text("OK")
+                        }
+                    }
+                )
             }
 
             if (showDialog) {
@@ -189,6 +209,11 @@ fun BMI() {
             }
         }
     }
+}
+
+fun isValidCM(input: String): Boolean {
+    val numberPattern = Pattern.compile("^(0|[1-9]\\d?\\d?\\d?|20[0-1]\\d|202[0-3])$")
+    return numberPattern.matcher(input).matches()
 }
 
 @Preview(showBackground = true, showSystemUi = true)

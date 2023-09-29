@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.week3_willy_53.ui.theme.Purple40
 import kotlinx.coroutines.launch
+import java.util.regex.Pattern
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,7 +85,7 @@ fun Umur() {
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
-                            modifier = Modifier.padding(16.dp) // Add padding to the Text
+                            modifier = Modifier.padding(16.dp)
                         )
                     }
 
@@ -106,8 +107,8 @@ fun Umur() {
 
                         OutlinedTextField(
                             value = name,
-                            onValueChange = { newName ->
-                                name = newName
+                            onValueChange = {
+                                name = it
                             },
                             label = { Text("Enter your name", color = Color.Gray) },
                             shape = RoundedCornerShape(30.dp),
@@ -118,13 +119,16 @@ fun Umur() {
                                 focusedBorderColor = Purple40,
                                 unfocusedBorderColor = Purple40,
                             ),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text, imeAction = ImeAction.Next)
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                keyboardType = KeyboardType.Text,
+                                imeAction = ImeAction.Next
+                            )
                         )
 
                         OutlinedTextField(
                             value = year,
-                            onValueChange = { newYear ->
-                                year = newYear
+                            onValueChange = {
+                                year = it
                             },
                             label = { Text("Enter your birth year", color = Color.Gray) },
                             shape = RoundedCornerShape(30.dp),
@@ -135,15 +139,28 @@ fun Umur() {
                                 focusedBorderColor = Purple40,
                                 unfocusedBorderColor = Purple40,
                             ),
-                            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done)
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Done
+                            )
                         )
                         Button(
                             onClick = {
-                                if (year.isNotBlank() && year.toIntOrNull() != null) {
-                                    age = 2023 - year.toInt()
-                                    showButton = true
-                                    currentName = name
-                                    currentYear = year
+                                if (isValidYear(year)) {
+                                    if (year.toInt() <= 2023) {
+                                        age = 2023 - year.toInt()
+                                        showButton = true
+                                        currentName = name
+                                        currentYear = year
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar("Hi, $name! Your Age is $age years")
+                                        }
+                                    } else {
+                                        showButton = false
+                                        scope.launch {
+                                            snackbarHostState.showSnackbar("Invalid input")
+                                        }
+                                    }
                                 } else {
                                     showButton = false
                                     scope.launch {
@@ -190,7 +207,7 @@ fun Umur() {
                             }
                         }
 
-                        if(currentName != name) {
+                        if (currentName != name) {
                             showButton = false
                         }
                         if (currentYear != year) {
@@ -206,6 +223,11 @@ fun Umur() {
         )
     }
 }
+
+fun isValidYear(input: String): Boolean {
+    return input.matches(Regex("^(0|[1-9]\\d?\\d?\\d?|202[0-3])$"))
+}
+
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
