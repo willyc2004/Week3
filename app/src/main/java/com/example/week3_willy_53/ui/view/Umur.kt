@@ -162,7 +162,7 @@ fun Umur() {
                             enabled = name.isNotBlank() && year.isNotBlank()
                         )
                         {
-                            Text(text = "CALCULATE YOUR")
+                            Text(text = "CALCULATE YOUR AGE")
                         }
 
                         if (showButton) {
